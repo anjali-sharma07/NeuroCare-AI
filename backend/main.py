@@ -1,4 +1,4 @@
-# Step1: Setup FastAPI backend
+
 from fastapi import FastAPI, Form
 from pydantic import BaseModel
 import uvicorn
@@ -7,7 +7,7 @@ from ai_agent import graph, SYSTEM_PROMPT, parse_response
 
 app = FastAPI()
 
-# Step2: Receive and validate request from Frontend
+
 class Query(BaseModel):
     message: str
 
@@ -16,11 +16,11 @@ class Query(BaseModel):
 @app.post("/ask")
 async def ask(query: Query):
     inputs = {"messages": [("system", SYSTEM_PROMPT), ("user", query.message)]}
-    #inputs = {"messages": [("user", query.message)]}
+    
     stream = graph.stream(inputs, stream_mode="updates")
     tool_called_name, final_response = parse_response(stream)
 
-    # Step3: Send response to the frontend
+  
     return {"response": final_response,
             "tool_called": tool_called_name}
 
@@ -48,7 +48,7 @@ async def whatsapp_ask(Body: str = Form(...)):
     if not final_response:
         final_response = "I'm here to support you, but I couldn't generate a response just now."
 
-    # Step3: Send response to Twilio
+  
     return _twiml_message(final_response)
 
 

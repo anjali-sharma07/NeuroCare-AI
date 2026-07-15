@@ -1,4 +1,4 @@
-# Step1: Setup Ollama with Medgemma tool
+
 import ollama
 
 def query_medgemma(prompt: str) -> str:
@@ -41,7 +41,7 @@ def query_medgemma(prompt: str) -> str:
         return f"I'm having technical difficulties, but I want you to know your feelings matter. Please try again shortly."
 
 
-# Step2: Setup Twilio calling API tool
+
 from twilio.rest import Client
 from config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER, EMERGENCY_CONTACT
 
@@ -55,5 +55,5 @@ def call_emergency():
 
 
 
-# Step3: Setup Location tool
+
 
